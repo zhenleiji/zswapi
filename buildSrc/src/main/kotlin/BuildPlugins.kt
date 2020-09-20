@@ -11,10 +11,12 @@ object BuildPlugins {
     object Ids {
         const val androidApplication = "com.android.application"
         const val kotlinAndroid = "kotlin-android"
-        const val ktlintGradle = "org.jlleitschuh.gradle.ktlint"
+        const val ktlintPlugin = "org.jlleitschuh.gradle.ktlint"
+        const val detektPlugin = "io.gitlab.arturbosch.detekt"
     }
 
     object Versions {
-        const val ktlintGradle = "9.4.0"
+        const val ktlintPlugin = "9.4.0"
+        const val detektPlugin = "1.13.1"
     }
 }
