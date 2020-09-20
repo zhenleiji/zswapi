@@ -1,3 +1,7 @@
+plugins {
+    id(BuildPlugins.Ids.ktlintGradle) version BuildPlugins.Versions.ktlintGradle
+}
+
 buildscript {
     repositories {
         google()
@@ -15,6 +19,12 @@ allprojects {
     repositories {
         google()
         jcenter()
+    }
+
+    with(BuildPlugins.Ids) {
+        subprojects {
+            apply(plugin = ktlintGradle)
+        }
     }
 }
 
