@@ -11,5 +11,10 @@ object BuildPlugins {
     object Ids {
         const val androidApplication = "com.android.application"
         const val kotlinAndroid = "kotlin-android"
+        const val ktlintGradle = "org.jlleitschuh.gradle.ktlint"
+    }
+
+    object Versions {
+        const val ktlintGradle = "9.4.0"
     }
 }
