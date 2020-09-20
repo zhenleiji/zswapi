@@ -1,5 +1,8 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
-    id(BuildPlugins.Ids.ktlintGradle) version BuildPlugins.Versions.ktlintGradle
+    id(BuildPlugins.Ids.ktlintPlugin) version BuildPlugins.Versions.ktlintPlugin
+    id(BuildPlugins.Ids.detektPlugin) version BuildPlugins.Versions.detektPlugin
 }
 
 buildscript {
@@ -23,11 +26,18 @@ allprojects {
 
     with(BuildPlugins.Ids) {
         subprojects {
-            apply(plugin = ktlintGradle)
+            apply(plugin = ktlintPlugin)
+            apply(plugin = detektPlugin)
         }
     }
 }
 
-tasks.register("clean").configure {
-    delete("build")
+tasks {
+    register("clean").configure {
+        delete("build")
+    }
+
+    withType<Detekt> {
+        jvmTarget = KotlinConfig.targetJVM
+    }
 }
