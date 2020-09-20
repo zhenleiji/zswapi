@@ -3,6 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 plugins {
     id(BuildPlugins.Ids.ktlintPlugin) version BuildPlugins.Versions.ktlintPlugin
     id(BuildPlugins.Ids.detektPlugin) version BuildPlugins.Versions.detektPlugin
+    id(BuildPlugins.Ids.jacocoPlugin) version BuildPlugins.Versions.jacocoPlugin
 }
 
 buildscript {
