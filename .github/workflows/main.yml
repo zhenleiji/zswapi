@@ -1,6 +1,10 @@
 name: Main
 
-on: [push]
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   static_analysis:
@@ -32,6 +36,11 @@ jobs:
 
       - name: Run ktlint
         run: ./gradlew ktlintCheck --stacktrace
+
+      - name: Add ktlint comments
+        uses: le0nidas/ktlint-pr-comments@v1
+        with:
+          repotoken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run detekt
         run: ./gradlew detekt --stacktrace
