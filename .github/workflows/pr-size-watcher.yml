@@ -15,5 +15,6 @@ jobs:
           warningMessage: ':warning: PR has more than **{allowed} additions**. Consider splitting it into smaller PRs.'
           excludePaths:  |
             README.md
-            *.json
-            *.xml
+            **/*.json
+            **/*.xml
+            **/*.yml

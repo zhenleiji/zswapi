@@ -35,16 +35,16 @@ jobs:
           mkdir -p ~/.gradle
           cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: Run ktlint
-        run: ./gradlew ktlintCheck --stacktrace
-
-      - name: Add ktlint comments
-        uses: le0nidas/ktlint-pr-comments@v1
+      - name: ktlint
+        uses: ScaCap/action-ktlint@master
         with:
-          repotoken: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run detekt
-        run: ./gradlew detekt --stacktrace
+      - name: detekt
+        uses: DominuS-RU/Detekt-Action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          detekt_config: config/detekt/detekt.yml
 
       - name: Run android lint
         run: ./gradlew lint --stacktrace
