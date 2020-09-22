@@ -1,0 +1,111 @@
+name: Main
+
+on: [branches, pull_request]
+
+jobs:
+  static_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Project Checkout
+        uses: actions/checkout@v2.3.2
+
+      - name: Setup JDK 1.8
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: 1.8
+
+      - name: Setup gradle.properties
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Run ktlint
+        run: ./gradlew ktlintCheck --stacktrace
+
+      - name: Run detekt
+        run: ./gradlew detekt --stacktrace
+
+      - name: Run android lint
+        run: ./gradlew lint --stacktrace
+
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Project Checkout
+        uses: actions/checkout@v2.3.2
+
+      - name: Setup JDK 1.8
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: 1.8
+
+      - name: Setup gradle.properties
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Run unit tests and capture code coverage
+        run: ./gradlew clean jacocoTestReportDebug --stacktrace
+
+      - name: Collect all test results from all modules
+        if: always()
+        run: |
+          mkdir -p junit
+          find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} junit/ \;
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v2.1.4
+        with:
+          name: junit-results-unit-tests
+          path: junit
+
+assemble_apk:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Project Checkout
+      uses: actions/checkout@v2.3.2
+
+    - name: Setup JDK 1.8
+      uses: actions/setup-java@v1.4.2
+      with:
+        java-version: 1.8
+
+    - name: Setup gradle.properties
+      run: |
+        mkdir -p ~/.gradle
+        cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
+
+    - name: Assemble APK
+      run: ./gradlew clean app:assembleDebug --stacktrace
+
+  ui_tests:
+    runs-on: macOS-latest
+    needs: assemble_apk
+    steps:
+      - name: Project Checkout
+        uses: actions/checkout@v2.3.2
+
+      - name: Setup JDK 1.8
+        uses: actions/setup-java@v1.4.2
+        with:
+          java-version: 1.8
+
+      - name: Setup gradle.properties
+        run: |
+          mkdir -p ~/.gradle
+          cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
+
+      - name: Run Espresso
+        uses: reactivecircus/android-emulator-runner@v2.11.0
+        with:
+          api-level: 29
+          arch: x86_64
+          script: ./gradlew clean :app:connectedAndroidTest --stacktrace
+
+      - name: Archive build outputs
+        if: always()
+        uses: actions/upload-artifact@v2.1.4
+        with:
+          name: build-outputs
+          path: app/build/outputs
