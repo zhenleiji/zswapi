@@ -1,15 +1,20 @@
 object Dependencies {
 
     object Projects {
+        private const val featureDir = ":features"
+        private const val libraryDir = ":libraries"
     }
 
     object Libraries {
         const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:${KotlinConfig.version}"
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         const val androidKtx = "androidx.core:core-ktx:${Versions.androidX}"
         const val androidAppCompat = "androidx.appcompat:appcompat:${Versions.androidX}"
-        const val androidMaterialDesign = "com.google.android.material:material:${Versions.androidX}"
-        const val androidConstraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidConstraintLayout}"
+        const val androidMaterialDesign =
+            "com.google.android.material:material:${Versions.androidX}"
+        const val androidConstraintLayout =
+            "androidx.constraintlayout:constraintlayout:${Versions.androidConstraintLayout}"
         const val moshi = "com.squareup.moshi:moshi:${Versions.moshi}"
         const val moshiCompiler = "com.squareup.moshi:moshi-kotlin-codegen:${Versions.moshi}"
         const val moshiAdapters = "com.squareup.moshi:moshi-adapters:${Versions.moshi}"
@@ -30,7 +35,8 @@ object Dependencies {
         const val junit = "org.junit.jupiter:junit-jupiter-api:${Versions.junit}"
         const val junitEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit}"
         const val junitParam = "org.junit.jupiter:junit-jupiter-params:${Versions.junit}"
-        const val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
+        const val mockitoKotlin =
+            "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
         const val mockWebServer = "com.squareup.okhttp3:mockwebserver:${Versions.mockWebServer}"
 
         private object Versions {
