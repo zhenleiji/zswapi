@@ -8,6 +8,7 @@ on:
 
 jobs:
   static_analysis:
+    name: Run static analysis
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
@@ -49,6 +50,7 @@ jobs:
         run: ./gradlew lint --stacktrace
 
   unit_tests:
+    name: Run unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
@@ -92,6 +94,7 @@ jobs:
           path: junit
 
   assemble_apk:
+    name: Assemble apk
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
@@ -122,6 +125,7 @@ jobs:
         run: ./gradlew clean app:assembleDebug --stacktrace
 
   ui_tests:
+    name: Run ui tests
     runs-on: macOS-latest
     needs: assemble_apk
     steps:
