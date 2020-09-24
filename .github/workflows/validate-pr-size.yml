@@ -1,4 +1,4 @@
-name: PR Size Watcher
+name: Validate PR size
 on: [pull_request]
 
 jobs:
