@@ -35,12 +35,12 @@ jobs:
           mkdir -p ~/.gradle
           cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
 
-      - name: ktlint
+      - name: Run ktlint
         uses: ScaCap/action-ktlint@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: detekt
+      - name: Run detekt
         uses: DominuS-RU/Detekt-Action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

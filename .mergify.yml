@@ -6,7 +6,7 @@ pull_request_rules:
   - name: Automatic merge for Dependabot pull requests
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
-      - status-success=ui_tests
+      - status-success=Run ui tests
     actions:
       merge:
         method: squash
