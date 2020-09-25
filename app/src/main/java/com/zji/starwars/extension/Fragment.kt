@@ -7,17 +7,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.observe
 import androidx.viewbinding.ViewBinding
+import java.lang.reflect.Method
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-fun <T : ViewBinding> Fragment.viewBinding(viewBindingFactory: (View) -> T) =
-    FragmentViewBindingDelegate(this, viewBindingFactory)
+inline fun <reified VB : ViewBinding> Fragment.viewBinding(): FragmentViewBindingDelegate<VB> {
+    val bindMethod = VB::class.java.getDeclaredMethod("bind", View::class.java)
+    return FragmentViewBindingDelegate(this, bindMethod)
+}
 
-class FragmentViewBindingDelegate<T : ViewBinding>(
-    val fragment: Fragment,
-    val viewBindingFactory: (View) -> T
-) : ReadOnlyProperty<Fragment, T> {
-    private var binding: T? = null
+class FragmentViewBindingDelegate<VB : ViewBinding>(
+    private val fragment: Fragment,
+    private val method: Method
+) : ReadOnlyProperty<Fragment, VB> {
+    private var binding: VB? = null
 
     init {
         fragment.lifecycle.addObserver(
@@ -37,7 +40,7 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
         )
     }
 
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+    override fun getValue(thisRef: Fragment, property: KProperty<*>): VB {
         val binding = binding
         if (binding != null) {
             return binding
@@ -48,6 +51,9 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
             throw IllegalStateException("Should not attempt to get bindings when Fragment views are destroyed.")
         }
 
-        return viewBindingFactory(thisRef.requireView()).also { this.binding = it }
+        return method.invoke(null, thisRef.requireView())
+            .let { it as? VB }
+            ?.also { this.binding = it }
+            ?: throw IllegalStateException("Invalid ViewBinding")
     }
 }
