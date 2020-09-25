@@ -20,6 +20,10 @@ android {
         versionName = "1.0"
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -44,6 +48,8 @@ dependencies {
     with(Dependencies.Libraries) {
         implementation(kotlinStdLib)
         implementation(androidKtx)
+        implementation(androidLifecycleCommonJava)
+        implementation(androidLifecycleLivedataKtx)
         implementation(androidAppCompat)
         implementation(androidMaterialDesign)
         implementation(androidConstraintLayout)

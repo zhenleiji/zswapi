@@ -10,6 +10,10 @@ object Dependencies {
         const val coroutines =
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         const val androidKtx = "androidx.core:core-ktx:${Versions.androidX}"
+        const val androidLifecycleCommonJava =
+            "androidx.lifecycle:lifecycle-common-java8:${Versions.androidLifecycle}"
+        const val androidLifecycleLivedataKtx =
+            "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.androidLifecycle}"
         const val androidAppCompat = "androidx.appcompat:appcompat:${Versions.androidX}"
         const val androidMaterialDesign =
             "com.google.android.material:material:${Versions.androidX}"
@@ -28,6 +32,7 @@ object Dependencies {
             const val moshi = "1.9.3"
             const val androidX = "1.2.0"
             const val androidConstraintLayout = "2.0.0"
+            const val androidLifecycle = "2.2.0"
         }
     }
 
