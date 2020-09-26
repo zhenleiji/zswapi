@@ -18,7 +18,7 @@ object BuildPlugins {
 
     object Versions {
         const val ktlintPlugin = "9.4.0"
-        const val detektPlugin = "1.13.1"
+        const val detektPlugin = "1.14.0"
         const val jacocoPlugin = "0.16.0"
     }
 }
