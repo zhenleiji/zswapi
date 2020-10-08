@@ -160,7 +160,7 @@ jobs:
           cp .github/githubci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Run Espresso
-        uses: reactivecircus/android-emulator-runner@v2.11.0
+        uses: reactivecircus/android-emulator-runner@v2.11.1
         with:
           api-level: 29
           arch: x86_64
