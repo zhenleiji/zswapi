@@ -94,7 +94,7 @@ jobs:
 
       - name: Archive test results
         if: always()
-        uses: actions/upload-artifact@v2.2.2
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: junit-results-unit-tests
           path: junit
@@ -168,7 +168,7 @@ jobs:
 
       - name: Archive build outputs
         if: always()
-        uses: actions/upload-artifact@v2.2.2
+        uses: actions/upload-artifact@v2.2.4
         with:
           name: build-outputs
           path: app/build/outputs
