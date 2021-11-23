@@ -18,7 +18,7 @@ jobs:
         run: ./compute_cache_key.sh key.txt
 
       - name: Setup cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         continue-on-error: true
         with:
           path: ~/.gradle/caches
@@ -67,7 +67,7 @@ jobs:
         run: ./compute_cache_key.sh key.txt
 
       - name: Setup cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         continue-on-error: true
         with:
           path: ~/.gradle/caches
@@ -112,7 +112,7 @@ jobs:
         run: ./compute_cache_key.sh key.txt
 
       - name: Setup cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         continue-on-error: true
         with:
           path: ~/.gradle/caches
@@ -145,7 +145,7 @@ jobs:
         run: ./compute_cache_key.sh key.txt
 
       - name: Setup cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v2.1.7
         continue-on-error: true
         with:
           path: ~/.gradle/caches
