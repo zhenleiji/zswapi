@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Compute key for CI cache
         run: ./compute_cache_key.sh key.txt
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Compute key for CI cache
         run: ./compute_cache_key.sh key.txt
@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Project Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Compute key for CI cache
         run: ./compute_cache_key.sh key.txt
@@ -139,7 +139,7 @@ jobs:
     needs: assemble_apk
     steps:
       - name: Project Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Compute key for CI cache
         run: ./compute_cache_key.sh key.txt
